@@ -1,0 +1,24 @@
+{% extends 'shop/basic.html' %}
+
+{%block title%} Contract Us {% endblock %}
+
+
+
+
+{%block body%}
+
+<div class="container">
+    <form action="/shop/contactfun/" method="post"> {% csrf_token %}
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Enter Your text Here</label>
+            <textarea class="form-control" id="text" name="text" rows="3"></textarea>
+          </div>
+          <button type="submit" name="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

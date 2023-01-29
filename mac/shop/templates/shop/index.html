@@ -1,0 +1,72 @@
+{% extends 'shop/basic.html' %}
+
+{%block title%}  index {% endblock %}
+{%block css%} 
+<style>
+img.card-img-top {
+
+  height: 200px;
+  width: auto;
+}
+</style>
+{% endblock %}
+{%block body%}
+
+    {% for product, nSlides in allProds %}
+    
+    
+    <div class="container">
+    <h5 class="my-4">{{product.0.category}} - All Items</h5>
+      <div class="row">
+        {%for i in product%}
+        <div class="col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='/media/{{i.image}}' class="card-img-top" alt="phone">
+            <div class="card-body">
+              <h5 class="card-title">{{i.product_name}}</h5>
+              <p class="card-text">{{i.category}}</p>
+              <p class="card-text">{{i.price}}tk</p>
+              <button id="pr{{i.id}}" class="btn btn-primary cart">Add to Cart</button>
+              <a href="/shop/products/{{i.id}}"><button id="qv{{i.id}}" class="btn btn-primary cart">Quick View</button></a>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+        
+      </div>
+      
+    </div>
+    {%endfor%}
+    {% endblock %}
+    {%block js%}
+    <script>
+      console.log('working')
+      if(localStorage.getItem('cart') == null){
+      var cart = {};
+      }
+      else
+      {
+      cart = JSON.parse(localStorage.getItem('cart'));
+      document.getElementById('cart').innerHTML = Object.keys(cart).length
+      }
+      $('.cart').click(function(){
+      console.log('clicked');
+      var idstr= this.id.toString();
+      console.log(idstr);
+      if(cart[idstr]!= undefined) {
+      cart[idstr] = cart[idstr]+1;
+      }
+      else{
+      cart[idstr] = 1;
+      }
+      console.log(cart);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      document.getElementById('cart').innerHTML = Object.keys(cart).length
+      });
+      //pop over
+      const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+      const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    </script>
+     {% endblock %}
+  </body>
+</html>

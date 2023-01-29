@@ -1,0 +1,72 @@
+{% extends 'shop/basic.html' %}
+
+{%block title%} {{product1.product_name}} {% endblock %}
+
+
+
+
+
+{%block body%} 
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <img src="/media/{{product1.image}}" width="233px" height="385px">
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-8">
+                    <button class="btn btn-primary">Buy Now</button>
+                    <button class="btn btn-primary cart">Add To Cart</button>
+                </div>
+                <div class="col-md-2">
+                    
+                </div>
+            </div>
+            </div>
+
+        <div class="col-md-8">
+            <h5>{{product1.product_name}}</h5>
+            <p><b>TK.{{product1.price}} </b></p>
+            <p>{{product1.desc}}</p>
+        </div>
+    </div>
+
+
+</div>
+ 
+{% endblock %}
+
+{%block js%}
+<script>
+  console.log('working')
+  if(localStorage.getItem('cart') == null){
+  var cart = {};
+  }
+  else
+  {
+  cart = JSON.parse(localStorage.getItem('cart'));
+  document.getElementById('cart').innerHTML = Object.keys(cart).length
+  }
+  $('.cart').click(function(){
+  console.log('clicked');
+  var idstr= this.id.toString();
+  console.log(idstr);
+  if(cart[idstr]!= undefined) {
+  cart[idstr] = cart[idstr]+1;
+  }
+  else{
+  cart[idstr] = 1;
+  }
+  console.log(cart);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  document.getElementById('cart').innerHTML = Object.keys(cart).length
+  });
+  //pop over
+  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+  const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+</script>
+ {% endblock %}
