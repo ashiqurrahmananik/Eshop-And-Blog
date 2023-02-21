@@ -127,6 +127,12 @@
     document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
     updateCart(cart)
   })
+  $('#itemsJson').val(JSON.stringify(cart));
+  {% if thank %}
+  alert("Thanks for ordering with us. Your order id is {{id}}. Use it to track your order using our order tracker")
+  localStorage.clear();
+  document.location = "/shop";
+  {% endif %}
 
 </script>
 {% endblock %}
