@@ -18,7 +18,8 @@
     </div>
     <div class="col my-4">
         <h2> Step 2 - Enter Address & Other Details</h2>
-        <form>
+        <form method="post" action="/shop/checkout">{%csrf_token%}
+            <input type="hidden" name="itemsjson" id="itemsjson">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">Name</label>
